@@ -203,7 +203,7 @@ func! s:GenPCH(clang, options, header)
     if cho != 1 | return | endif
   endif
   
-  let l:command = a:clang . ' -cc1 ' . a:options .
+  let l:command = a:clang . ' -cc1 -triple i386-apple-darwin10.8.0' . a:options .
         \ ' -emit-pch -o ' . l:header.'.pch ' . l:header
   let l:clang_output = system(l:command)
 
@@ -421,10 +421,10 @@ func! s:ClangCompleteInit()
   endif
   
   " add include directories
-  let l:incs = s:DiscoverIncludeDirs(g:clang_exec, b:clang_options)
-  for l:dir in l:incs
-    let b:clang_options .= ' -I' . l:dir
-  endfor
+  "let l:incs = s:DiscoverIncludeDirs(g:clang_exec, b:clang_options)
+  "for l:dir in l:incs
+  "  let b:clang_options .= ' -I' . l:dir
+  "endfor
   
   " backup options without PCH support
   let b:clang_options_noPCH = b:clang_options
